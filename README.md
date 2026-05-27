@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Study Hive
 
-## Getting Started
+Marketing website for [The Study Hive](https://mystudyhive.co.uk) — online tutoring by post-graduate professionals and medical students, founded by Bee.
 
-First, run the development server:
+Built with **Next.js 16** (App Router), **TypeScript**, **Tailwind CSS v4**, and **Resend** for contact forms.
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home — hero, how it works, subjects teaser, testimonials |
+| `/subjects` | Subjects & fees (flashcards) |
+| `/about` | Meet Bee and the tutor team |
+| `/contact` | Parent / student enquiry form |
+| `/for-tutors` | Tutor application form |
+
+## Local development
+
+**Requirements:** Node.js 20+
 
 ```bash
+npm install
+cp .env.example .env.local   # then add your Resend API key
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `RESEND_API_KEY` | Yes | From [resend.com](https://resend.com) → API Keys |
+| `CONTACT_EMAIL` | Yes | Inbox for form submissions (e.g. `ask.studyhive@gmail.com`) |
+| `RESEND_FROM` | No | Sender after domain is verified in Resend |
 
-## Learn More
+`.env.local` is gitignored — never commit secrets.
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev      # development server
+npm run build    # production build
+npm run start    # run production build locally
+npm run lint     # ESLint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment (Hostinger + GitHub)
 
-## Deploy on Vercel
+1. Push this repo to GitHub (`main` branch).
+2. In Hostinger: create a **Node.js** app, connect the GitHub repo.
+3. Set build / start commands:
+   - **Build:** `npm run build`
+   - **Start:** `npm start`
+4. Add the same environment variables in the Hostinger panel (`RESEND_API_KEY`, `CONTACT_EMAIL`).
+5. Point your domain at the new app.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Push to `main` triggers a redeploy when Git integration is enabled.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project docs
+
+- [`docs/BRAND.md`](docs/BRAND.md) — colours, typography, voice
+- [`docs/CONTENT.md`](docs/CONTENT.md) — canonical copy
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — folder structure and technical notes
+
+## Content changes
+
+Edit copy in [`lib/content.ts`](lib/content.ts) (and mirror in `docs/CONTENT.md` when updating wording).
