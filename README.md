@@ -47,15 +47,34 @@ npm run lint     # ESLint
 
 ## Deployment (Hostinger + GitHub)
 
-1. Push this repo to GitHub (`main` branch).
-2. In Hostinger: create a **Node.js** app, connect the GitHub repo.
-3. Set build / start commands:
-   - **Build:** `npm run build`
-   - **Start:** `npm start`
-4. Add the same environment variables in the Hostinger panel (`RESEND_API_KEY`, `CONTACT_EMAIL`).
-5. Point your domain at the new app.
+This site is a **static export** (HTML/CSS/JS) — no Node.js on Hostinger required.
 
-Push to `main` triggers a redeploy when Git integration is enabled.
+### Automatic deploy (recommended)
+
+1. **Disable** Hostinger **Advanced → GIT** auto-deploy (it only copies source code → 403).
+2. GitHub repo → **Settings → Secrets and variables → Actions** → add:
+   - `FTP_SERVER` — e.g. `ftp.mystudyhive.co.uk` (from hPanel → **Files → FTP Accounts**)
+   - `FTP_USERNAME`
+   - `FTP_PASSWORD`
+3. Push to `main` → GitHub Actions builds and uploads the `out/` folder to `public_html`.
+
+### Form emails on the server (one-time)
+
+Hostinger **File Manager** → `public_html/api/`:
+
+1. Copy `config.example.php` → `config.php`
+2. Paste your Resend API key and `contact_email`
+
+Forms use PHP + Resend (not `.env.local` on the server).
+
+### Local development
+
+```bash
+npm run dev
+```
+
+Forms use Next.js API routes locally (`/api/contact`). On production they use `/api/contact.php`.
+
 
 ## Project docs
 

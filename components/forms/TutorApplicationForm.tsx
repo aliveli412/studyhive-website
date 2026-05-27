@@ -7,6 +7,7 @@ import {
   tutorApplicationSchema,
   type TutorApplicationValues,
 } from "@/lib/schemas";
+import { tutorApplicationEndpoint } from "@/lib/form-endpoints";
 import { Button } from "@/components/ui/Button";
 import { Field, Honeypot, inputClass } from "@/components/forms/FormField";
 
@@ -32,7 +33,7 @@ export function TutorApplicationForm() {
   const onSubmit = async (values: TutorApplicationValues) => {
     setState({ status: "submitting" });
     try {
-      const res = await fetch("/api/tutor-application", {
+      const res = await fetch(tutorApplicationEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

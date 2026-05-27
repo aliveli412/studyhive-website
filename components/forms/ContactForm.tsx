@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactFormValues } from "@/lib/schemas";
+import { contactFormEndpoint } from "@/lib/form-endpoints";
 import { Button } from "@/components/ui/Button";
 import { Field, Honeypot, inputClass } from "@/components/forms/FormField";
 
@@ -29,7 +30,7 @@ export function ContactForm() {
   const onSubmit = async (values: ContactFormValues) => {
     setState({ status: "submitting" });
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(contactFormEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
