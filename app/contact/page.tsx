@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/forms/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Tell us about your child — age, school year, subjects, exam board, and the times that work. Bee will reply personally.",
+    "Tell us about your child - age, school year, subjects, exam board, and the times that work.",
 };
 
 export default function ContactPage() {
@@ -20,8 +20,8 @@ export default function ContactPage() {
               Contact Us
             </h1>
             <p className="mt-4 text-base text-cocoa-700 md:text-lg">
-              Tell us about your child — age, school year, subjects, exam board,
-              and the times that work. Bee will reply personally.
+              Tell us about your child - age, school year, subjects, exam board,
+              and the times that work.
             </p>
           </div>
         </section>

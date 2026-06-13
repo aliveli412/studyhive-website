@@ -50,7 +50,7 @@ export function FeesTable() {
         </div>
 
         <p className="mt-6 text-center text-sm text-cocoa-700">
-          Online-only tutoring. We also offer French, History, Separate Sciences and more — just ask.
+          Online-only tutoring. We also offer French, History, Separate Sciences and more - just ask.
         </p>
       </div>
     </section>

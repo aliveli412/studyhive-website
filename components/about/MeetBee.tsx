@@ -3,7 +3,7 @@ import { meetBee } from "@/lib/content";
 
 export function MeetBee() {
   return (
-    <section className="px-6 py-16 md:px-8 md:py-20">
+    <section className="px-6 pt-6 pb-16 md:px-8 md:pt-8 md:pb-20">
       <div className="mx-auto max-w-5xl">
         <h2 className="text-center font-display text-3xl font-semibold text-cocoa-900 md:text-4xl">
           {meetBee.heading}

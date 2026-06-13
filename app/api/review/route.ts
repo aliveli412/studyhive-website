@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { tutorApplicationSchema } from "@/lib/schemas";
-import { buildTutorApplicationEmail, sendEmail } from "@/lib/email";
+import { reviewFormSchema } from "@/lib/schemas";
+import { buildReviewEmail, sendEmail } from "@/lib/email";
 import { footer } from "@/lib/content";
 
 export async function POST(request: Request) {
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const parsed = tutorApplicationSchema.safeParse(body);
+  const parsed = reviewFormSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
       {
@@ -31,14 +31,14 @@ export async function POST(request: Request) {
   }
 
   try {
-    await sendEmail(buildTutorApplicationEmail(parsed.data));
+    await sendEmail(buildReviewEmail(parsed.data));
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("Tutor application form error:", err);
+    console.error("Review form error:", err);
     return NextResponse.json(
       {
         ok: false,
-        error: `We couldn't send your application. Please email us directly at ${footer.email} or try again.`,
+        error: `We couldn't send your review. Please email us directly at ${footer.email} or try again.`,
       },
       { status: 500 }
     );

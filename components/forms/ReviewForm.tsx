@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { tutorApplicationSchema, type TutorApplicationValues } from "@/lib/schemas";
-import { tutorApplicationEndpoint } from "@/lib/form-endpoints";
+import { reviewFormSchema, type ReviewFormValues } from "@/lib/schemas";
+import { reviewFormEndpoint } from "@/lib/form-endpoints";
 import { footer } from "@/lib/content";
 import { Button } from "@/components/ui/Button";
 import { Field, Honeypot, inputClass } from "@/components/forms/FormField";
@@ -15,7 +15,11 @@ type SubmissionState =
   | { status: "success" }
   | { status: "error"; message: string };
 
-export function TutorApplicationForm() {
+type ReviewFormProps = {
+  onSuccess?: () => void;
+};
+
+export function ReviewForm({ onSuccess }: ReviewFormProps) {
   const [state, setState] = useState<SubmissionState>({ status: "idle" });
 
   const {
@@ -23,15 +27,15 @@ export function TutorApplicationForm() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<TutorApplicationValues>({
-    resolver: zodResolver(tutorApplicationSchema),
+  } = useForm<ReviewFormValues>({
+    resolver: zodResolver(reviewFormSchema),
     mode: "onSubmit",
   });
 
-  const onSubmit = async (values: TutorApplicationValues) => {
+  const onSubmit = async (values: ReviewFormValues) => {
     setState({ status: "submitting" });
     try {
-      const res = await fetch(tutorApplicationEndpoint, {
+      const res = await fetch(reviewFormEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
@@ -48,6 +52,7 @@ export function TutorApplicationForm() {
       }
       setState({ status: "success" });
       reset();
+      onSuccess?.();
     } catch {
       setState({
         status: "error",
@@ -60,17 +65,17 @@ export function TutorApplicationForm() {
     return (
       <div className="rounded-2xl bg-cream p-8 text-center">
         <h2 className="font-display text-2xl font-semibold text-cocoa-900">
-          Thanks for applying.
+          Thanks - your review is on its way.
         </h2>
         <p className="mt-3 text-base text-cocoa-900">
-          Bee will be in touch shortly.
+          We appreciate your feedback.
         </p>
         <button
           type="button"
           onClick={() => setState({ status: "idle" })}
           className="mt-6 text-sm font-semibold text-cocoa-800 underline hover:text-cocoa-900"
         >
-          Send another application
+          Write another review
         </button>
       </div>
     );
@@ -82,28 +87,9 @@ export function TutorApplicationForm() {
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
       <Honeypot register={register("website")} />
 
-      <Field
-        label="Title / Subject *"
-        htmlFor="tutor-title"
-        error={errors.titleSubject?.message}
-      >
+      <Field label="Name *" htmlFor="review-name" error={errors.name?.message}>
         <input
-          id="tutor-title"
-          type="text"
-          autoComplete="off"
-          placeholder="e.g. Maths tutor application"
-          {...register("titleSubject")}
-          className={inputClass(!!errors.titleSubject)}
-        />
-      </Field>
-
-      <Field
-        label="Name *"
-        htmlFor="tutor-name"
-        error={errors.name?.message}
-      >
-        <input
-          id="tutor-name"
+          id="review-name"
           type="text"
           autoComplete="name"
           {...register("name")}
@@ -111,54 +97,53 @@ export function TutorApplicationForm() {
         />
       </Field>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Field
-          label="Email *"
-          htmlFor="tutor-email"
-          error={errors.email?.message}
-        >
-          <input
-            id="tutor-email"
-            type="email"
-            autoComplete="email"
-            inputMode="email"
-            {...register("email")}
-            className={inputClass(!!errors.email)}
-          />
-        </Field>
-        <Field
-          label="Phone"
-          htmlFor="tutor-phone"
-          error={errors.phone?.message}
-        >
-          <input
-            id="tutor-phone"
-            type="tel"
-            autoComplete="tel"
-            inputMode="tel"
-            {...register("phone")}
-            className={inputClass(!!errors.phone)}
-          />
-        </Field>
-      </div>
+      <Field
+        label="Email *"
+        htmlFor="review-email"
+        error={errors.email?.message}
+      >
+        <input
+          id="review-email"
+          type="email"
+          autoComplete="email"
+          inputMode="email"
+          {...register("email")}
+          className={inputClass(!!errors.email)}
+        />
+      </Field>
 
       <Field
-        label="Your application *"
-        htmlFor="tutor-application"
-        error={errors.application?.message}
+        label="Tutor name"
+        htmlFor="review-tutor"
+        error={errors.tutorName?.message}
+      >
+        <input
+          id="review-tutor"
+          type="text"
+          autoComplete="off"
+          placeholder="e.g. Bee"
+          {...register("tutorName")}
+          className={inputClass(!!errors.tutorName)}
+        />
+      </Field>
+
+      <Field
+        label="Your review *"
+        htmlFor="review-message"
+        error={errors.review?.message}
       >
         <textarea
-          id="tutor-application"
-          rows={8}
-          placeholder="Please be as detailed as possible. Mention your teaching experience (months / years), the subjects you tutor and your qualifications."
-          {...register("application")}
-          className={inputClass(!!errors.application)}
+          id="review-message"
+          rows={6}
+          placeholder="Share your experience with your tutor..."
+          {...register("review")}
+          className={inputClass(!!errors.review)}
         />
       </Field>
 
       <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Sending..." : "Submit"}
+          {isSubmitting ? "Sending..." : "Submit review"}
         </Button>
         {state.status === "error" && (
           <p className="text-sm text-red-700 sm:text-right" role="alert">

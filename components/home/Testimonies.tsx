@@ -1,4 +1,5 @@
 import { testimonies } from "@/lib/content";
+import { TestimonyFeedback } from "@/components/home/TestimonyFeedback";
 
 export function Testimonies() {
   return (
@@ -23,6 +24,7 @@ export function Testimonies() {
             </figure>
           ))}
         </div>
+        <TestimonyFeedback />
       </div>
     </section>
   );

@@ -179,3 +179,41 @@ export function buildTutorApplicationEmail(values: {
 
   return { subject, replyTo: values.email, html, text };
 }
+
+export function buildReviewEmail(values: {
+  name: string;
+  email: string;
+  tutorName?: string;
+  review: string;
+}): EmailPayload {
+  const tutor = values.tutorName?.trim() || "(not provided)";
+  const subject = `[Study Hive Review] Feedback from ${values.name}`;
+
+  const text = [
+    `New tutor review from the Study Hive website`,
+    ``,
+    `Name:   ${values.name}`,
+    `Email:  ${values.email}`,
+    `Tutor:  ${tutor}`,
+    ``,
+    `Review:`,
+    values.review,
+    ``,
+    `---`,
+    `Reply to this email to respond directly to ${values.name}.`,
+  ].join("\n");
+
+  const html = emailHtml({
+    title: "New tutor review from the Study Hive website",
+    fields: [
+      { label: "Name", value: values.name },
+      { label: "Email", value: values.email, isLink: true },
+      { label: "Tutor", value: tutor },
+    ],
+    bodyLabel: "Review",
+    bodyText: values.review,
+    name: values.name,
+  });
+
+  return { subject, replyTo: values.email, html, text };
+}

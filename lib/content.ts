@@ -36,7 +36,7 @@ export const hero = {
     "All lessons are delivered online.",
   ],
   intro:
-    "The Study Hive is a network of experienced, friendly tutors. All of our tutors have a prior degree, teaching experience and an enhanced DBS — but most importantly, a passion for tutoring. We believe in making learning engaging, effective, and focused on building confidence. The Study Hive was founded by Bee, a current Graduate Entry Medical Student with 12+ years of tutoring experience.",
+    "The Study Hive is a network of experienced, friendly tutors. All of our tutors have a prior degree, teaching experience and an enhanced DBS - but most importantly, a passion for tutoring. We believe in making learning engaging, effective, and focused on building confidence. The Study Hive was founded by Bee, a current Graduate Entry Medical Student with 14+ years of tutoring experience.",
   primaryCTA: { label: "View Subjects", href: "/subjects" },
   secondaryCTA: { label: "Book Now", href: "/contact" },
 };
@@ -72,7 +72,7 @@ export const subjectsTeaser = {
 export const testimonies: Testimony[] = [
   {
     quote:
-      "Burcu was such an amazing tutor for combined science higher. Not only did she get me from a 6-6 in Year 10 to a 9-9 for my final GCSE results, her lessons are so fun and interactive.",
+      "Bee was such an amazing tutor for combined science higher. Not only did she get me from a 6-6 in Year 10 to a 9-9 for my final GCSE results, her lessons are so fun and interactive.",
     author: "Taisia",
     date: "25 Aug 2025",
   },
@@ -84,7 +84,7 @@ export const testimonies: Testimony[] = [
   },
   {
     quote:
-      "My daughter was on the verge of detesting Physics, when Burcu stepped in. After 7-8 months she is achieving grade 7 & 8 in all science subjects.",
+      "My daughter was on the verge of detesting Physics, when Bee stepped in. After 7-8 months she is achieving grade 7 & 8 in all science subjects.",
     author: "Bhawana",
     date: "16 Jun 2025",
   },
@@ -93,7 +93,25 @@ export const testimonies: Testimony[] = [
     author: "Jaymie",
     date: "05 Jan 2024",
   },
+  {
+    quote:
+      "Bee has helped both of my girls with German and Science at Secondary School level. Bee is very efficient and committed, very helpful and very friendly. The girls feel very at ease with her as a person and her way of tutoring. She expects the same level of commitment from my girls, which I find very encouraging. I can definitely recommend Bee as a tutor.",
+    author: "Ines",
+    date: "February 2023",
+  },
+  {
+    quote:
+      "Bee is such a lovely science tutor. She is reliable, committed, transparent, kind and a great tutor to my teenage daughters.",
+    author: "Cathrine",
+    date: "June 2025",
+  },
 ];
+
+export const testimonyFeedback = {
+  prompt:
+    "Would you like to give feedback from a tutor that you've recently had lessons with?",
+  cta: "Write a review",
+};
 
 // ──────────────────────────────────────────────────────────────────────────
 // Subjects page
@@ -149,7 +167,7 @@ export const specialProgrammes: SpecialProgramme[] = [
 export const fees: Fee[] = [
   { subject: "German (GCSE)", oneToOne: "£50", group: "£25" },
   {
-    subject: "Science (GCSE) — Biology, Chemistry, Physics",
+    subject: "Science (GCSE) - Biology, Chemistry, Physics",
     oneToOne: "£40",
     group: "£20",
   },
@@ -183,11 +201,11 @@ export const meetBee = {
   closing:
     "I started this company because sharing knowledge is my greatest passion. I know what it feels like to struggle and I know exactly how rewarding it is to finally understand.",
   welcome:
-    "Welcome to the Hive — I look forward to helping your child discover their own confidence and love for learning!",
+    "Welcome to the Hive - I look forward to helping your child discover their own confidence and love for learning!",
 };
 
 export const aboutTutors = {
-  heading: "Tutors In The Hive",
+  heading: "Some of The Tutors In The Hive",
   note: "Tutors are assigned to students on the basis of availability.",
 };
 
@@ -217,6 +235,6 @@ export const contactCTA = {
 export const footer = {
   tagline:
     "Founded by Bee · Tutoring by post-graduate professionals & doctors",
-  email: "ask.studyhive@gmail.com",
+  email: "ask@thestudyhive.org",
   copyright: "© 2026 The Study Hive. All rights reserved.",
 };

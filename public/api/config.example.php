@@ -5,6 +5,6 @@
  */
 return [
     'resend_api_key' => 're_your_key_here',
-    'contact_email' => 'ask.studyhive@gmail.com',
+    'contact_email' => 'ask@thestudyhive.org',
     'from' => 'Study Hive <onboarding@resend.dev>',
 ];

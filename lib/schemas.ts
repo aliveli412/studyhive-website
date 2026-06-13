@@ -50,5 +50,23 @@ export const tutorApplicationSchema = z.object({
     .max(5000, "Your application is too long."),
 });
 
+export const reviewFormSchema = z.object({
+  name: baseFields.name,
+  email: baseFields.email,
+  tutorName: z
+    .string()
+    .trim()
+    .max(100, "Tutor name is too long.")
+    .optional()
+    .or(z.literal("")),
+  review: z
+    .string()
+    .trim()
+    .min(20, "Please write a bit more detail (at least 20 characters).")
+    .max(5000, "Your review is too long."),
+  website: baseFields.website,
+});
+
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
 export type TutorApplicationValues = z.infer<typeof tutorApplicationSchema>;
+export type ReviewFormValues = z.infer<typeof reviewFormSchema>;

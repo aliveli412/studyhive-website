@@ -21,7 +21,7 @@ export function TutorList() {
   return (
     <section className="border-t border-cocoa-800/10 bg-honey-100 px-6 py-16 md:px-8 md:py-20">
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-center font-display text-3xl font-semibold uppercase tracking-wide text-cocoa-900 md:text-4xl">
+        <h2 className="text-center font-display text-3xl font-semibold text-cocoa-900 md:text-4xl">
           {aboutTutors.heading}
         </h2>
         <p className="mt-3 text-center text-sm italic text-cocoa-700 md:text-base">

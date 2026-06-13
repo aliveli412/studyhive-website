@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { contactFormSchema } from "@/lib/schemas";
 import { buildContactEmail, sendEmail } from "@/lib/email";
+import { footer } from "@/lib/content";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -37,8 +38,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        error:
-          "We couldn't send your message. Please email us directly at ask.studyhive@gmail.com or try again.",
+        error: `We couldn't send your message. Please email us directly at ${footer.email} or try again.`,
       },
       { status: 500 }
     );

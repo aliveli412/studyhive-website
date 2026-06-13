@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactFormValues } from "@/lib/schemas";
 import { contactFormEndpoint } from "@/lib/form-endpoints";
+import { footer } from "@/lib/content";
 import { Button } from "@/components/ui/Button";
 import { Field, Honeypot, inputClass } from "@/components/forms/FormField";
 
@@ -41,7 +42,7 @@ export function ContactForm() {
           status: "error",
           message:
             data.error ||
-            "Something went wrong. Please email us directly at ask.studyhive@gmail.com or try again.",
+            `Something went wrong. Please email us directly at ${footer.email} or try again.`,
         });
         return;
       }
@@ -50,8 +51,7 @@ export function ContactForm() {
     } catch {
       setState({
         status: "error",
-        message:
-          "Something went wrong. Please email us directly at ask.studyhive@gmail.com or try again.",
+        message: `Something went wrong. Please email us directly at ${footer.email} or try again.`,
       });
     }
   };
@@ -60,7 +60,7 @@ export function ContactForm() {
     return (
       <div className="rounded-2xl bg-cream p-8 text-center">
         <h2 className="font-display text-2xl font-semibold text-cocoa-900">
-          Thanks — your enquiry is on its way.
+          Thanks - your enquiry is on its way.
         </h2>
         <p className="mt-3 text-base text-cocoa-900">
           Bee will reply within 48 hours.

@@ -8,3 +8,8 @@ export const tutorApplicationEndpoint =
   process.env.NODE_ENV === "development"
     ? "/api/tutor-application"
     : "/api/tutor-application.php";
+
+export const reviewFormEndpoint =
+  process.env.NODE_ENV === "development"
+    ? "/api/review"
+    : "/api/review.php";
