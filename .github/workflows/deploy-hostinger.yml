@@ -39,8 +39,27 @@ jobs:
             exit 1
           fi
 
+      - name: Remove stale FTP sync state
+        continue-on-error: true
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          lftp <<EOF
+          set ftp:ssl-force true
+          set ftp:passive-mode true
+          set ssl:verify-certificate no
+          open -u "${FTP_USERNAME}","${FTP_PASSWORD}" "${FTP_SERVER}"
+          rm -f public_html/.ftp-deploy-sync-state.json
+          rm -f .ftp-deploy-sync-state.json
+          bye
+          EOF
+
       - name: FTP deploy to public_html
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
