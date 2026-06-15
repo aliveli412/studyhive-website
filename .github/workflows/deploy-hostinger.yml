@@ -53,10 +53,16 @@ jobs:
           set ftp:passive-mode true
           set ssl:verify-certificate no
           open -u "${FTP_USERNAME}","${FTP_PASSWORD}" "${FTP_SERVER}"
-          rm -f public_html/.ftp-deploy-sync-state.json
           rm -f .ftp-deploy-sync-state.json
+          rm -f public_html/.ftp-deploy-sync-state.json
           bye
           EOF
+
+      - name: Verify build output before deploy
+        run: |
+          grep -q "ask@thestudy-hive.org" out/index.html
+          grep -q "Bee was such an amazing tutor" out/index.html
+          echo "Build output contains expected content."
 
       - name: FTP deploy to public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
@@ -67,7 +73,8 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./out/
-          server-dir: ./public_html/
+          # Hostinger FTP accounts usually open directly in public_html — not one level above.
+          server-dir: ./
           # Keep server-only api/config.php across deploys
           exclude: |
             **/api/config.php
