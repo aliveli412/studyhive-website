@@ -17,6 +17,7 @@ export function HomeBrandMark() {
   return (
     <Link
       href="/"
+      prefetch={false}
       aria-label="The Study Hive — home"
       className="group relative block h-14 w-[4.5rem] shrink-0 md:h-16 md:w-20"
     >

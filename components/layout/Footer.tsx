@@ -10,6 +10,7 @@ export function Footer() {
           <div>
             <Link
               href="/"
+              prefetch={false}
               aria-label="The Study Hive — home"
               className="inline-block"
             >
@@ -27,6 +28,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    prefetch={false}
                     className="text-cocoa-900 transition-colors hover:text-cocoa-700"
                   >
                     {item.label}

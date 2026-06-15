@@ -19,6 +19,7 @@ export function Header({ showLogo = true }: Props) {
         {showLogo ? (
           <Link
             href="/"
+            prefetch={false}
             aria-label="The Study Hive — home"
             className="block"
           >
@@ -33,6 +34,7 @@ export function Header({ showLogo = true }: Props) {
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  prefetch={false}
                   className="font-display text-base font-bold text-cocoa-900 transition-colors hover:text-cocoa-700 md:text-lg"
                 >
                   {item.label}
