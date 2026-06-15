@@ -36,13 +36,19 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-      const data = (await res.json()) as { ok: boolean; error?: string };
+      const data = (await res.json()) as {
+        ok: boolean;
+        error?: string;
+        detail?: string;
+      };
       if (!res.ok || !data.ok) {
+        const detail = data.detail ? ` (${data.detail})` : "";
         setState({
           status: "error",
           message:
-            data.error ||
-            `Something went wrong. Please email us directly at ${footer.email} or try again.`,
+            (data.error ||
+              `Something went wrong. Please email us directly at ${footer.email} or try again.`) +
+            detail,
         });
         return;
       }
