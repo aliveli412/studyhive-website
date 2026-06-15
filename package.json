@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && node scripts/prepare-hostinger-out.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:icons": "powershell -ExecutionPolicy Bypass -File scripts/generate-icons.ps1"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
