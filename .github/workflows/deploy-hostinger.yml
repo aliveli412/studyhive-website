@@ -13,7 +13,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
 
       - run: npm ci
@@ -22,6 +22,22 @@ jobs:
       - run: rm -rf app/api
 
       - run: npm run build
+
+      - name: Validate FTP server hostname
+        run: |
+          SERVER="${{ secrets.FTP_SERVER }}"
+          if [ -z "$SERVER" ]; then
+            echo "::error::FTP_SERVER secret is missing. Add it in GitHub → Settings → Secrets → Actions."
+            exit 1
+          fi
+          if echo "$SERVER" | grep -qE '^(ftp|ftps)://'; then
+            echo "::error::FTP_SERVER must be hostname only (no ftp:// prefix). Example: ftp.mystudyhive.co.uk"
+            exit 1
+          fi
+          if echo "$SERVER" | grep -q '/'; then
+            echo "::error::FTP_SERVER must not include a path. Use only the hostname."
+            exit 1
+          fi
 
       - name: FTP deploy to public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
