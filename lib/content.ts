@@ -235,6 +235,6 @@ export const contactCTA = {
 export const footer = {
   tagline:
     "Founded by Bee · Tutoring by post-graduate professionals & doctors",
-  email: "ask@thestudyhive.org",
+  email: "ask@thestudy-hive.org",
   copyright: "© 2026 The Study Hive. All rights reserved.",
 };

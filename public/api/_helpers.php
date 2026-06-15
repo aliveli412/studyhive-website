@@ -127,7 +127,7 @@ function send_resend_email(array $config, array $payload): void
         error_log('Resend error: ' . $msg);
         json_response(500, [
             'ok' => false,
-            'error' => "We couldn't send your message. Please email us directly at ask@thestudyhive.org or try again.",
+            'error' => "We couldn't send your message. Please email us directly at ask@thestudy-hive.org or try again.",
         ]);
     }
 }
